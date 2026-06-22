@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Itisha Gupta — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ivory:#FAF7F1;
+    --paper:#FFFFFF;
+    --ink:#211F1B;
+    --muted:#6F6A5E;
+    --line:#E6E0D2;
+    --clay:#B9603F;
+    --clay-soft:#F3E2DA;
+    --sage:#6E7F5C;
+    --sage-soft:#E7ECDD;
+    --shadow: 0 20px 50px -25px rgba(33,31,27,0.35);
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+
+  html{scroll-behavior:smooth;}
+
+  body{
+    background:var(--ivory);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+
+  ::selection{background:var(--clay);color:var(--ivory);}
+
+  a{color:inherit;text-decoration:none;}
+
+  img{max-width:100%;display:block;}
+
+  .wrap{
+    max-width:1120px;
+    margin:0 auto;
+    padding:0 32px;
+  }
+
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12.5px;
+    letter-spacing:0.06em;
+    color:var(--clay);
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:18px;
+    text-transform:lowercase;
+  }
+  .eyebrow::before{
+    content:'';
+    width:22px;height:1px;
+    background:var(--clay);
+    display:inline-block;
+  }
+
+  h1,h2,h3,h4{
+    font-family:'Fraunces',serif;
+    font-weight:500;
+    letter-spacing:-0.01em;
+  }
+
+  .note{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    color:var(--muted);
+    letter-spacing:0.02em;
+  }
+
+  /* ---------- reveal animation ---------- */
+  .reveal{
+    opacity:0;
+    transform:translateY(28px);
+    transition:opacity 0.8s cubic-bezier(.22,.61,.36,1), transform 0.8s cubic-bezier(.22,.61,.36,1);
+  }
+  .reveal.in-view{opacity:1;transform:translateY(0);}
+  .reveal-delay-1{transition-delay:0.08s;}
+  .reveal-delay-2{transition-delay:0.16s;}
+  .reveal-delay-3{transition-delay:0.24s;}
+  .reveal-delay-4{transition-delay:0.32s;}
+
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    .reveal{opacity:1;transform:none;transition:none;}
+  }
+
+  /* ---------- NAV ---------- */
+  header{
+    position:fixed;
+    top:0;left:0;right:0;
+    z-index:100;
+    padding:20px 0;
+    transition:background 0.4s ease, padding 0.4s ease, border-color 0.4s ease;
+    border-bottom:1px solid transparent;
+  }
+  header.scrolled{
+    background:rgba(250,247,241,0.86);
+    backdrop-filter:blur(10px);
+    -webkit-backdrop-filter:blur(10px);
+    padding:14px 0;
+    border-bottom:1px solid var(--line);
+  }
+  nav{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .logo{
+    font-family:'Fraunces',serif;
+    font-size:21px;
+    font-weight:600;
+    display:flex;
+    align-items:center;
+    gap:9px;
+  }
+  .logo-mark{
+    width:9px;height:9px;
+    border-radius:50%;
+    background:var(--clay);
+    display:inline-block;
+  }
+  .nav-links{
+    display:flex;
+    gap:34px;
+    list-style:none;
+  }
+  .nav-links a{
+    font-size:14.5px;
+    color:var(--ink);
+    position:relative;
+    padding:4px 0;
+  }
+  .nav-links a::after{
+    content:'';
+    position:absolute;
+    left:0;bottom:0;
+    width:0;height:1px;
+    background:var(--clay);
+    transition:width 0.3s ease;
+  }
+  .nav-links a:hover::after,
+  .nav-links a.active::after{width:100%;}
+  .nav-links a.active{color:var(--clay);}
+
+  .nav-cta{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:13px;
+    background:var(--ink);
+    color:var(--ivory);
+    padding:10px 20px;
+    border-radius:30px;
+    transition:background 0.3s ease, transform 0.3s ease;
+    white-space:nowrap;
+  }
+  .nav-cta:hover{background:var(--clay);transform:translateY(-2px);}
+
+  .nav-toggle{display:none;background:none;border:none;cursor:pointer;flex-direction:column;gap:5px;}
+  .nav-toggle span{width:24px;height:2px;background:var(--ink);}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    padding:168px 0 100px;
+    position:relative;
+  }
+  .hero-grid{
+    max-width:720px;
+  }
+  .hero h1{
+    font-size:clamp(46px,6.2vw,84px);
+    line-height:0.98;
+    margin:0 0 22px;
+  }
+  .hero h1 em{
+    font-style:italic;
+    color:var(--clay);
+    font-weight:400;
+  }
+  .hero-sub{
+    font-size:17px;
+    color:var(--muted);
+    max-width:520px;
+    margin-bottom:34px;
+  }
+  .hero-sub strong{color:var(--ink);font-weight:600;}
+
+  .btn-row{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:56px;}
+  .btn{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:13.5px;
+    padding:14px 26px;
+    border-radius:32px;
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    transition:transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease, color 0.3s ease;
+  }
+  .btn-primary{
+    background:var(--clay);
+    color:var(--ivory);
+  }
+  .btn-primary:hover{transform:translateY(-3px);box-shadow:var(--shadow);}
+  .btn-outline{
+    border:1px solid var(--ink);
+    color:var(--ink);
+  }
+  .btn-outline:hover{background:var(--ink);color:var(--ivory);transform:translateY(-3px);}
+
+  .stat-row{
+    display:flex;
+    gap:48px;
+    flex-wrap:wrap;
+  }
+  .stat-num{
+    font-family:'Fraunces',serif;
+    font-size:34px;
+    font-weight:600;
+    color:var(--clay);
+    line-height:1;
+  }
+  .stat-label{
+    font-size:12.5px;
+    color:var(--muted);
+    margin-top:6px;
+    font-family:'IBM Plex Mono',monospace;
+  }
+
+  /* hero photo frame */
+  .photo-stage{
+    position:relative;
+    display:flex;
+    justify-content:center;
+  }
+  .photo-frame{
+    position:relative;
+    width:100%;
+    max-width:340px;
+    background:var(--paper);
+    padding:14px 14px 50px;
+    border-radius:4px;
+    box-shadow:var(--shadow);
+    transform:rotate(3deg);
+    transition:transform 0.4s ease;
+  }
+  .photo-frame:hover{transform:rotate(0deg);}
+  .photo-frame img{
+    width:100%;
+    aspect-ratio:4/4.7;
+    object-fit:cover;
+    object-position:center 20%;
+    border-radius:2px;
+  }
+  .photo-caption{
+    position:absolute;
+    bottom:16px;left:14px;right:14px;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11.5px;
+    color:var(--muted);
+    display:flex;
+    justify-content:space-between;
+  }
+  .photo-tag{
+    position:absolute;
+    top:-14px;right:-18px;
+    background:var(--sage);
+    color:var(--ivory);
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11.5px;
+    padding:7px 14px;
+    border-radius:30px;
+    transform:rotate(-4deg);
+    box-shadow:0 10px 20px -10px rgba(0,0,0,0.3);
+  }
+
+  /* ---------- SECTION SHARED ---------- */
+  section{padding:120px 0;border-top:1px solid var(--line);}
+  .sec-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    margin-bottom:56px;
+    gap:40px;
+    flex-wrap:wrap;
+  }
+  .sec-head h2{font-size:clamp(32px,4vw,46px);}
+  .sec-head-right{
+    max-width:340px;
+    font-size:14.5px;
+    color:var(--muted);
+    text-align:right;
+  }
+  @media(max-width:720px){.sec-head-right{text-align:left;}}
+
+  /* ---------- ABOUT ---------- */
+  .about-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:70px;
+  }
+  .about-text p{
+    font-size:16.5px;
+    color:var(--ink);
+    margin-bottom:20px;
+  }
+  .about-text strong{color:var(--clay);font-weight:600;}
+
+  .info-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:18px;
+  }
+  .info-card{
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:24px 20px;
+    transition:transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  }
+  .info-card:hover{
+    transform:translateY(-5px);
+    box-shadow:var(--shadow);
+    border-color:var(--clay);
+  }
+  .info-icon{font-size:22px;margin-bottom:12px;display:block;}
+  .info-title{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    color:var(--clay);
+    margin-bottom:8px;
+    text-transform:lowercase;
+  }
+  .info-body{font-size:14px;color:var(--muted);}
+
+  /* ---------- SKILLS ---------- */
+  .skill-block{margin-bottom:42px;}
+  .skill-block:last-child{margin-bottom:0;}
+  .skill-block-label{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:13px;
+    color:var(--muted);
+    margin-bottom:16px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .skill-block-label::after{
+    content:'';
+    flex:1;
+    height:1px;
+    background:var(--line);
+  }
+  .chip-row{display:flex;flex-wrap:wrap;gap:11px;}
+  .chip{
+    font-size:14px;
+    padding:9px 18px;
+    border-radius:30px;
+    border:1px solid var(--line);
+    background:var(--paper);
+    transition:all 0.25s ease;
+    cursor:default;
+  }
+  .chip:hover{
+    background:var(--ink);
+    color:var(--ivory);
+    border-color:var(--ink);
+    transform:translateY(-3px);
+  }
+
+  /* ---------- EXPERIENCE ---------- */
+  .exp-card{
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:44px;
+    position:relative;
+    overflow:hidden;
+    transition:box-shadow 0.4s ease, transform 0.4s ease;
+  }
+  .exp-card:hover{box-shadow:var(--shadow);transform:translateY(-4px);}
+  .exp-card::before{
+    content:'';
+    position:absolute;
+    top:0;left:0;
+    width:5px;height:100%;
+    background:var(--clay);
+  }
+  .exp-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    flex-wrap:wrap;
+    gap:14px;
+    margin-bottom:8px;
+  }
+  .exp-org{font-size:21px;font-family:'Fraunces',serif;font-weight:600;}
+  .exp-date{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12.5px;
+    color:var(--clay);
+    background:var(--clay-soft);
+    padding:6px 14px;
+    border-radius:20px;
+    white-space:nowrap;
+  }
+  .exp-role{color:var(--muted);font-size:15px;margin-bottom:24px;font-style:italic;font-family:'Fraunces',serif;}
+  .exp-list{list-style:none;margin-bottom:24px;}
+  .exp-list li{
+    position:relative;
+    padding-left:22px;
+    margin-bottom:13px;
+    font-size:15px;
+    color:var(--ink);
+  }
+  .exp-list li::before{
+    content:'→';
+    position:absolute;
+    left:0;
+    color:var(--sage);
+  }
+  .exp-tags{display:flex;flex-wrap:wrap;gap:9px;}
+  .exp-tags span{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11.5px;
+    color:var(--sage);
+    background:var(--sage-soft);
+    padding:5px 12px;
+    border-radius:20px;
+  }
+
+  /* ---------- PROJECTS ---------- */
+  .proj-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:24px;
+  }
+  .proj-card{
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:32px 28px;
+    display:flex;
+    flex-direction:column;
+    height:100%;
+    transition:transform 0.35s ease, box-shadow 0.35s ease;
+  }
+  .proj-card:hover{transform:translateY(-7px);box-shadow:var(--shadow);}
+  .proj-card.upcoming{border-style:dashed;background:transparent;}
+  .proj-icon{font-size:26px;margin-bottom:18px;}
+  .proj-card h3{font-size:19px;margin-bottom:12px;font-weight:600;}
+  .proj-card p{font-size:14px;color:var(--muted);margin-bottom:20px;flex:1;}
+  .proj-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px;}
+  .proj-tags span{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px;
+    color:var(--muted);
+    border:1px solid var(--line);
+    padding:4px 10px;
+    border-radius:20px;
+  }
+  .proj-link{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:13px;
+    color:var(--clay);
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+  }
+  .proj-link span{transition:transform 0.3s ease;}
+  .proj-link:hover span{transform:translateX(4px);}
+
+  /* ---------- CERTS ---------- */
+  .cert-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:18px;
+  }
+  .cert-card{
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:24px 26px;
+    display:flex;
+    gap:18px;
+    align-items:flex-start;
+    transition:transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .cert-card:hover{transform:translateY(-4px);box-shadow:var(--shadow);}
+  .cert-card.pending{border-style:dashed;}
+  .cert-icon{font-size:22px;flex-shrink:0;}
+  .cert-title{font-size:15.5px;font-weight:600;margin-bottom:5px;}
+  .cert-meta{font-size:13px;color:var(--muted);}
+  .cert-date{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11.5px;
+    color:var(--sage);
+    margin-top:6px;
+    display:block;
+  }
+  .pill-pending{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:10.5px;
+    color:var(--clay);
+    border:1px solid var(--clay);
+    padding:2px 9px;
+    border-radius:20px;
+    margin-left:8px;
+  }
+
+  /* ---------- WHY HIRE ---------- */
+  .why-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:20px;
+  }
+  .why-card{
+    padding:30px 24px;
+    border-radius:14px;
+    background:var(--ink);
+    color:var(--ivory);
+    transition:transform 0.35s ease;
+  }
+  .why-card:hover{transform:translateY(-7px);}
+  .why-card:nth-child(2){background:var(--clay);}
+  .why-card:nth-child(3){background:var(--sage);}
+  .why-card:nth-child(4){background:#3D4A33;}
+  .why-icon{font-size:24px;margin-bottom:16px;}
+  .why-card h3{font-size:17px;margin-bottom:10px;font-weight:600;}
+  .why-card p{font-size:13.5px;opacity:0.85;}
+
+  /* ---------- CONTACT ---------- */
+  .contact-sec{
+    text-align:center;
+    padding-bottom:90px;
+  }
+  .contact-sec h2{
+    font-size:clamp(36px,6vw,68px);
+    line-height:1.05;
+    margin-bottom:24px;
+  }
+  .contact-sec h2 em{font-style:italic;color:var(--clay);}
+  .contact-sec > p{
+    max-width:520px;
+    margin:0 auto 44px;
+    color:var(--muted);
+    font-size:16px;
+  }
+  .contact-links{
+    display:flex;
+    justify-content:center;
+    gap:18px;
+    flex-wrap:wrap;
+  }
+  .contact-link{
+    background:var(--paper);
+    border:1px solid var(--line);
+    padding:16px 26px;
+    border-radius:14px;
+    display:flex;
+    flex-direction:column;
+    gap:4px;
+    min-width:200px;
+    transition:all 0.3s ease;
+  }
+  .contact-link:hover{
+    border-color:var(--clay);
+    transform:translateY(-5px);
+    box-shadow:var(--shadow);
+  }
+  .contact-link .cl-label{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11.5px;
+    color:var(--clay);
+  }
+  .contact-link .cl-value{font-size:14.5px;font-weight:500;}
+
+  footer{
+    border-top:1px solid var(--line);
+    padding:32px 0;
+    text-align:center;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12.5px;
+    color:var(--muted);
+  }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media(max-width:900px){
+    .hero-grid{grid-template-columns:1fr;}
+    .photo-stage{order:-1;margin-bottom:20px;}
+    .photo-frame{max-width:260px;}
+    .about-grid{grid-template-columns:1fr;gap:40px;}
+    .proj-grid{grid-template-columns:1fr;}
+    .why-grid{grid-template-columns:1fr 1fr;}
+    .cert-grid{grid-template-columns:1fr;}
+  }
+  @media(max-width:720px){
+    .nav-links,.nav-cta{display:none;}
+    .nav-toggle{display:flex;}
+    header.menu-open .nav-links{
+      display:flex;
+      position:fixed;
+      top:64px;left:0;right:0;
+      background:var(--ivory);
+      flex-direction:column;
+      padding:24px 32px;
+      gap:20px;
+      border-bottom:1px solid var(--line);
+    }
+    header.menu-open .nav-cta{
+      display:inline-flex;
+      position:fixed;
+      top:230px;
+      left:32px;
+    }
+    .info-grid{grid-template-columns:1fr;}
+    .why-grid{grid-template-columns:1fr;}
+    .sec-head{flex-direction:column;align-items:flex-start;}
+    .sec-head-right{text-align:left;}
+    section{padding:80px 0;}
+    .hero{padding:140px 0 70px;}
+  }
+</style>
+</head>
+<body>
+
+<header id="siteHeader">
+  <div class="wrap">
+    <nav>
+      <a href="#top" class="logo"><span class="logo-mark"></span>Itisha Gupta</a>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#certifications">Certs</a></li>
+      </ul>
+      <a href="#contact" class="nav-cta">Hire Me ↗</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero" style="border-top:none;padding-top:168px;">
+    <div class="wrap hero-grid">
+      <div>
+        <div class="eyebrow reveal in-view">open to internships · summer 2026</div>
+        <h1 class="reveal in-view">Itisha<br><em>Gupta</em></h1>
+        <p class="hero-sub reveal in-view reveal-delay-1">
+          <strong>B.Tech CSE (AI) · GL Bajaj Institute</strong> — first-year student building
+          a foundation in <strong>C &amp; C++</strong>, actively sharpening <strong>DSA</strong> and
+          <strong>OOP</strong> skills. Fast learner. Team leader. Ready to contribute.
+        </p>
+        <div class="btn-row reveal in-view reveal-delay-2">
+          <a href="#contact" class="btn btn-primary">Get in Touch →</a>
+          <a href="https://github.com/itishagupta22" target="_blank" rel="noopener" class="btn btn-outline">View GitHub</a>
+        </div>
+        <div class="stat-row reveal in-view reveal-delay-3">
+          <div>
+            <div class="stat-num">1st</div>
+            <div class="stat-label">year b.tech cse</div>
+          </div>
+          <div>
+            <div class="stat-num" data-count="219">0</div>
+            <div class="stat-label">linkedin followers</div>
+          </div>
+          <div>
+            <div class="stat-num" data-count="5">0</div>
+            <div class="stat-label">certifications</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div>
+          <div class="eyebrow">who i am</div>
+          <h2>About Me</h2>
+        </div>
+        <p class="sec-head-right">// first year, building daily — DSA, OOP, and a habit of showing up.</p>
+      </div>
+
+      <div class="about-grid">
+        <div class="about-text reveal">
+          <p>I'm a <strong>first-year B.Tech Computer Science (AI) student</strong> at G.L. Bajaj Institute of Technology and Management. I have a solid foundation in <strong>C and C++</strong>, and I'm currently deepening my skills in Data Structures, Algorithms, and Object-Oriented Programming through daily practice and hands-on projects.</p>
+          <p>Beyond coding, I serve as the <strong>Delhi Student Wing Convenor at Youth United Council of India</strong> — a role that has given me real experience in team coordination, event management, and leading cross-college initiatives. I believe great software developers need both technical depth and the ability to collaborate and communicate.</p>
+          <p>My goal is to secure an internship where I can contribute meaningfully, learn from experienced professionals, and grow into a well-rounded software developer. I'm available for a <strong>2-month internship</strong> and committed to giving my absolute best.</p>
+        </div>
+
+        <div class="info-grid">
+          <div class="info-card reveal">
+            <span class="info-icon">🎯</span>
+            <div class="info-title">currently learning</div>
+            <div class="info-body">DSA in C++ · OOP concepts · LeetCode / HackerRank · web dev basics</div>
+          </div>
+          <div class="info-card reveal reveal-delay-1">
+            <span class="info-icon">📍</span>
+            <div class="info-title">location &amp; availability</div>
+            <div class="info-body">Greater Delhi Area &amp; Jaipur · open to hybrid or remote · available now</div>
+          </div>
+          <div class="info-card reveal reveal-delay-2">
+            <span class="info-icon">💡</span>
+            <div class="info-title">interests</div>
+            <div class="info-body">Software dev · AI · consumer technology · youth leadership</div>
+          </div>
+          <div class="info-card reveal reveal-delay-3">
+            <span class="info-icon">🚀</span>
+            <div class="info-title">what i bring</div>
+            <div class="info-body">Fast learner · strong work ethic · leadership · genuine curiosity</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div>
+          <div class="eyebrow">what i know</div>
+          <h2>Skills</h2>
+        </div>
+        <p class="sec-head-right">// the toolkit I practice with every day, and the one I'm building toward.</p>
+      </div>
+
+      <div class="skill-block reveal">
+        <div class="skill-block-label">technical skills</div>
+        <div class="chip-row">
+          <span class="chip">C</span>
+          <span class="chip">C++</span>
+          <span class="chip">OOP</span>
+          <span class="chip">Data Structures &amp; Algorithms</span>
+          <span class="chip">HTML</span>
+          <span class="chip">CSS</span>
+          <span class="chip">JavaScript</span>
+          <span class="chip">Git &amp; GitHub</span>
+          <span class="chip">VS Code</span>
+          <span class="chip">Problem Solving</span>
+        </div>
+      </div>
+
+      <div class="skill-block reveal reveal-delay-1">
+        <div class="skill-block-label">ai &amp; emerging tech</div>
+        <div class="chip-row">
+          <span class="chip">Generative AI (Fundamentals)</span>
+          <span class="chip">AI Tools &amp; Workflows</span>
+          <span class="chip">AI-Powered Data Analysis</span>
+          <span class="chip">Prompt Engineering (Basics)</span>
+        </div>
+      </div>
+
+      <div class="skill-block reveal reveal-delay-2">
+        <div class="skill-block-label">leadership &amp; soft skills</div>
+        <div class="chip-row">
+          <span class="chip">Team Leadership</span>
+          <span class="chip">Event Management</span>
+          <span class="chip">Public Speaking</span>
+          <span class="chip">Cross-team Coordination</span>
+          <span class="chip">Stakeholder Communication</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div>
+          <div class="eyebrow">where i've contributed</div>
+          <h2>Experience</h2>
+        </div>
+        <p class="sec-head-right">// one role, real ownership — coordinating a national student wing.</p>
+      </div>
+
+      <div class="exp-card reveal">
+        <div class="exp-top">
+          <div class="exp-org">Youth United Council of India</div>
+          <div class="exp-date">Apr 2026 — Present</div>
+        </div>
+        <div class="exp-role">Delhi Student Wing Convenor · Part-time, Hybrid</div>
+        <ul class="exp-list">
+          <li>Appointed as Convenor of the Delhi Student Wing under the Honour Code, representing YUCI's mission of empowering youth across India.</li>
+          <li>Led structured cross-functional communication between student members and senior leadership, ensuring alignment on goals and timely execution of wing-level programs.</li>
+          <li>Coordinated end-to-end planning and logistics for student initiatives, building hands-on experience in stakeholder management, event operations, and team collaboration.</li>
+          <li>Acted as the primary point of contact between Delhi-region students and the national YUCI leadership.</li>
+        </ul>
+        <div class="exp-tags">
+          <span>Leadership</span>
+          <span>Team Coordination</span>
+          <span>Event Management</span>
+          <span>Communication</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div>
+          <div class="eyebrow">what i've built</div>
+          <h2>Projects</h2>
+        </div>
+        <p class="sec-head-right">// two shipped, one in progress — the way most first-year builds go.</p>
+      </div>
+
+      <div class="proj-grid">
+        <div class="proj-card reveal">
+          <div class="proj-icon">🌐</div>
+          <h3>Developer Portfolio Website</h3>
+          <p>Designed and built a fully responsive personal portfolio from scratch with mobile-first principles and cross-browser compatibility. Deployed and actively maintained on GitHub Pages.</p>
+          <div class="proj-tags"><span>HTML</span><span>CSS</span><span>JavaScript</span></div>
+          <a href="https://github.com/itishagupta22" target="_blank" rel="noopener" class="proj-link">View on GitHub <span>→</span></a>
+        </div>
+
+        <div class="proj-card reveal reveal-delay-1">
+          <div class="proj-icon">⚙️</div>
+          <h3>C++ Algorithms &amp; DSA Repository</h3>
+          <p>An open-sourced collection of 20+ C++ programs covering prime numbers, Fibonacci, Armstrong numbers, GCD/LCM, factorials, and pattern logic — well-commented daily practice.</p>
+          <div class="proj-tags"><span>C++</span><span>OOP</span><span>Logic</span></div>
+          <a href="https://github.com/itishagupta22" target="_blank" rel="noopener" class="proj-link">View on GitHub <span>→</span></a>
+        </div>
+
+        <div class="proj-card upcoming reveal reveal-delay-2">
+          <div class="proj-icon">🔜</div>
+          <h3>Next Project — Coming Soon</h3>
+          <p>Currently learning OOP concepts in C++ — planning to build a mini project once I complete the fundamentals. Actively studying classes, objects, and inheritance.</p>
+          <div class="proj-tags"><span>C++</span><span>OOP</span><span>Learning</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CERTIFICATIONS -->
+  <section id="certifications">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div>
+          <div class="eyebrow">what i've learned</div>
+          <h2>Certifications</h2>
+        </div>
+        <p class="sec-head-right">// five earned and counting.</p>
+      </div>
+
+      <div class="cert-grid">
+        <div class="cert-card reveal">
+          <div class="cert-icon">🤖</div>
+          <div>
+            <div class="cert-title">Introduction to Modern AI</div>
+            <div class="cert-meta">Cisco Networking Academy · GL Bajaj Institute</div>
+            <span class="cert-date">June 2026 · ID: 7f83ac92</span>
+          </div>
+        </div>
+        <div class="cert-card reveal reveal-delay-1">
+          <div class="cert-icon">🤖</div>
+          <div>
+            <div class="cert-title">Apply AI: Analyze Customer Reviews</div>
+            <div class="cert-meta">Cisco Networking Academy · GL Bajaj Institute</div>
+            <span class="cert-date">May 2026</span>
+          </div>
+        </div>
+        <div class="cert-card reveal reveal-delay-2">
+          <div class="cert-icon">☁️</div>
+          <div>
+            <div class="cert-title">Introduction to Generative AI Studio</div>
+            <div class="cert-meta">Google Cloud · Simplilearn SkillUp</div>
+            <span class="cert-date">December 2025</span>
+          </div>
+        </div>
+        <div class="cert-card reveal reveal-delay-3">
+          <div class="cert-icon">📄</div>
+          <div>
+            <div class="cert-title">Apply AI: Update Your Resume</div>
+            <div class="cert-meta">Cisco Networking Academy · GL Bajaj Institute</div>
+            <span class="cert-date">2026</span>
+          </div>
+        </div>
+        <div class="cert-card reveal">
+          <div class="cert-icon">🔐</div>
+          <div>
+            <div class="cert-title">Introduction to Cybersecurity</div>
+            <div class="cert-meta">Cisco Networking Academy · GL Bajaj Institute</div>
+            <span class="cert-date">2026</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY HIRE ME -->
+  <section id="why">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div>
+          <div class="eyebrow">for recruiters</div>
+          <h2>Why Hire Me as an Intern?</h2>
+        </div>
+        <p class="sec-head-right">// the honest pitch, no exaggeration.</p>
+      </div>
+
+      <div class="why-grid">
+        <div class="why-card reveal">
+          <div class="why-icon">⚡</div>
+          <h3>Fast Learner</h3>
+          <p>Zero to C++ programs, AI certifications, and leading a national youth council — all in my first year of college.</p>
+        </div>
+        <div class="why-card reveal reveal-delay-1">
+          <div class="why-icon">🤝</div>
+          <h3>Team Player</h3>
+          <p>Leading a student wing has taught me to coordinate people and keep a team aligned — skills that translate directly to product work.</p>
+        </div>
+        <div class="why-card reveal reveal-delay-2">
+          <div class="why-icon">🎯</div>
+          <h3>Product Curious</h3>
+          <p>I've explored AI tools and customer review analysis. I think about products from a user's perspective, not just a developer's.</p>
+        </div>
+        <div class="why-card reveal reveal-delay-3">
+          <div class="why-icon">💪</div>
+          <h3>Fully Committed</h3>
+          <p>I understand this is an unpaid role. I'm here for the learning, and I'll show up every day with full effort and ownership.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="contact-sec">
+    <div class="wrap">
+      <div class="eyebrow reveal" style="justify-content:center;">let's talk</div>
+      <h2 class="reveal">Let's build something<br><em>together.</em></h2>
+      <p class="reveal">I'm a first-year student with a lot to learn — and a lot to give. If you have an internship, collaboration, or project opportunity, reach out. I respond fast.</p>
+      <div class="contact-links reveal">
+        <a href="https://www.linkedin.com/in/itisha-gupta-cse" target="_blank" rel="noopener" class="contact-link">
+          <span class="cl-label">💼 linkedin</span>
+          <span class="cl-value">linkedin.com/in/itisha-gupta-cse</span>
+        </a>
+        <a href="https://github.com/itishagupta22" target="_blank" rel="noopener" class="contact-link">
+          <span class="cl-label">🐙 github</span>
+          <span class="cl-value">github.com/itishagupta22</span>
+        </a>
+        <a href="mailto:itishagupta22@gmail.com" class="contact-link">
+          <span class="cl-label">✉️ email</span>
+          <span class="cl-value">itishagupta22@gmail.com</span>
+        </a>
+        <a href="itisha-gupta-resume.pdf" target="_blank" class="contact-link">
+          <span class="cl-label">📄 resume</span>
+          <span class="cl-value">Download PDF</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  © 2026 Itisha Gupta · B.Tech CSE (AI), GL Bajaj Institute · Building one project at a time.
+</footer>
+
+<script>
+  // header scroll state
+  const header = document.getElementById('siteHeader');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 30);
+  });
+
+  // mobile nav toggle
+  const navToggle = document.getElementById('navToggle');
+  navToggle.addEventListener('click', () => header.classList.toggle('menu-open'));
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    a.addEventListener('click', () => header.classList.remove('menu-open'));
+  });
+
+  // scrollspy
+  const sections = document.querySelectorAll('main section[id]');
+  const navAnchors = document.querySelectorAll('.nav-links a');
+  const spyObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navAnchors.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + entry.target.id));
+      }
+    });
+  }, { rootMargin: '-45% 0px -45% 0px' });
+  sections.forEach(s => spyObserver.observe(s));
+
+  // reveal on scroll
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in-view');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal:not(.in-view)').forEach(el => revealObserver.observe(el));
+
+  // count-up stats
+  const countEls = document.querySelectorAll('[data-count]');
+  const countObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const el = entry.target;
+        const target = parseInt(el.getAttribute('data-count'), 10);
+        let current = 0;
+        const step = Math.max(1, Math.round(target / 40));
+        const tick = () => {
+          current += step;
+          if (current >= target) { el.textContent = target + '+'; return; }
+          el.textContent = current;
+          requestAnimationFrame(tick);
+        };
+        tick();
+        countObserver.unobserve(el);
+      }
+    });
+  }, { threshold: 0.6 });
+  countEls.forEach(el => countObserver.observe(el));
+
+
+</script>
+
+</body>
+</html>
